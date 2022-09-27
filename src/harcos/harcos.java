@@ -12,11 +12,11 @@ public class Harcos{
         this.nev = nev;
         this.szint = 1;
         this.tapasztalat = 0;
-        //tank
+        //warrior
         if(statuszSablon == 1){
             this.alapEletero = 15;
             this.alapSebzes = 3;
-        //dps
+        //ranger
         }else if(statuszSablon == 2){
             this.alapEletero = 12;
             this.alapSebzes = 4;
@@ -27,7 +27,7 @@ public class Harcos{
         }else{
             System.out.println("Hibás Státusz Sablon!");
         }
-        this.eletero = alapEletero;
+        this.eletero = getMaxEletero();
     }
     public String getNev(){
         return nev;
@@ -68,14 +68,34 @@ public class Harcos{
     public int getMaxEletero(){
         return alapEletero + (szint*3);
     }
-    public void megkuzd(){
-
+    public void megkuzd(Harcos masikHarcos){
+        if(masikHarcos.nev.equals(this.nev)){
+            System.out.println("Nem tud magával megküzdeni!");
+        }else{
+            if(masikHarcos.eletero <= 0 || this.eletero <= 0){
+                System.out.println("Nem tud hullával megküzdeni!");
+            } else {
+                //Csata!
+                masikHarcos.setEletero(masikHarcos.getEletero()- this.getSebzes());
+                if (masikHarcos.eletero > 0){
+                    this.setEletero(this.getEletero()- masikHarcos.getSebzes());
+                    if(this.eletero > 0){
+                        this.setTapasztalat(this.getTapasztalat() + 5);
+                        masikHarcos.setTapasztalat(masikHarcos.getTapasztalat() + 5);
+                    }else{
+                        masikHarcos.setTapasztalat(masikHarcos.getTapasztalat() + 15);
+                    }
+                } else {
+                    this.setTapasztalat(this.getTapasztalat() + 15);
+                }
+            }
+        }
     }
     public void gyogyul(){
 
     }
     @Override
     public String toString() {
-
+        return String.format("%s - LVL: %d - EXP: %d/%d - HP: %d/%d - DMG: %d", nev,szint,tapasztalat,getSzintLepeshez(),eletero,getMaxEletero(),getSebzes());
     }
 }
