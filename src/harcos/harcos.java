@@ -8,20 +8,20 @@ public class Harcos{
     private int alapEletero;
     private int alapSebzes;
 
-    public Harcos(String nev, int statuszSablon) {
+    public Harcos(String nev, String statuszSablon) {
         this.nev = nev;
         this.szint = 1;
         this.tapasztalat = 0;
         //warrior
-        if(statuszSablon == 1){
+        if(statuszSablon.equals("1")){
             this.alapEletero = 15;
             this.alapSebzes = 3;
         //ranger
-        }else if(statuszSablon == 2){
+        }else if(statuszSablon.equals("2")){
             this.alapEletero = 12;
             this.alapSebzes = 4;
         //mage
-        }else if(statuszSablon == 3){
+        }else if(statuszSablon.equals("3")){
             this.alapEletero = 8;
             this.alapSebzes = 5;
         }else{
@@ -46,7 +46,7 @@ public class Harcos{
     }
     public void setTapasztalat(int tapasztalat){
         this.tapasztalat = tapasztalat;
-        if (this.tapasztalat >= this.getSzintLepeshez(){
+        if (this.tapasztalat >= this.getSzintLepeshez()){
             this.setSzint(this.getSzint()+1);
             this.setTapasztalat(this.getTapasztalat()-this.getSzintLepeshez());
             this.setEletero(this.getMaxEletero());
@@ -83,7 +83,7 @@ public class Harcos{
             if(masikHarcos.eletero <= 0 || this.eletero <= 0){
                 System.out.println("Nem tud hullával megküzdeni!");
             } else {
-                //Csata!
+                //Fight!
                 masikHarcos.setEletero(masikHarcos.getEletero()- this.getSebzes());
                 if (masikHarcos.eletero > 0){
                     this.setEletero(this.getEletero()- masikHarcos.getSebzes());
