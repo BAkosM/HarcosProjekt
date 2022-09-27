@@ -58,11 +58,6 @@ public class Main {
         Harcos player = new Harcos(playername,playerclass);
 
         while(q<1){
-            System.out.println("Ellenfelek: ");  
-            for(int i = 0; i < harcosok.size(); i++) {
-                System.out.println(harcosok.get(i));
-            }
-            while(b<1){
             System.out.printf("%d kor az ellenség támadásáig",kor);   
             System.out.println();
             if(kor == 0){
@@ -71,11 +66,16 @@ public class Main {
                 harcosok.get(ellenfel).megkuzd(player);
                 System.out.printf("%s megtámadott!",harcosok.get(ellenfel).getNev());
             }
+            System.out.println("Ellenfelek: ");  
+            for(int i = 0; i < harcosok.size(); i++) {
+                System.out.println(harcosok.get(i));
+            }
+            while(b<1){         
             System.out.println("Mit szeretnél csinálni (a-harcolok,b-gyógyulás,c-státusz,d-kilépés): ");
             menu = sr.next();
             if(menu.equals("a")){
                 System.out.println("Hanyadik ellenféllel küzdenél meg: ");
-                ellenfel = sr.nextInt();
+                ellenfel = sr.nextInt()-1;
                 if(ellenfel>harcosok.size()){
                     System.out.println("Nincs ilyen ellenfél!");
                 }else{
